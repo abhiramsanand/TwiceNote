@@ -98,7 +98,7 @@ const Chat: React.FC = () => {
         }}
       >
         {messages.map((message) => {
-          const isSender = String(message.sender) === String(userId1); // Ensure both are strings
+          const isSender = String(message.sender) === String(userId1); 
           return (
             <div
               key={message._id}
@@ -127,6 +127,12 @@ const Chat: React.FC = () => {
       <textarea
         value={messageContent}
         onChange={(e) => setMessageContent(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault(); 
+            handleSendMessage(); 
+          }
+        }}
         placeholder="Type your message here..."
         style={{
           width: "100%",
